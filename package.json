@@ -1,20 +1,30 @@
 {
-  "name": "@everymundo/CHANGE-THIS-NAME",
+  "name": "@everymundo/date-utils",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "LOG_LEVEL=silent mocha test --recursive",
+    "cover": "nyc -x test --reporter=lcov --reporter=text node_modules/mocha/bin/_mocha --recursive",
+    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "check-lint": "standard",
+    "fix-lint": "standard --fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EveryMundo/CHANGE-THIS-NAME.git"
+    "url": "git+https://github.com/EveryMundo/date-utils.git"
   },
   "keywords": [],
   "author": "Daniel Santana <git@danielsantan.net>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EveryMundo/CHANGE-THIS-NAME/issues"
+    "url": "https://github.com/EveryMundo/date-utils/issues"
   },
-  "homepage": "https://github.com/EveryMundo/CHANGE-THIS-NAME#readme"
+  "homepage": "https://github.com/EveryMundo/date-utils#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
+    "nyc": "^15.1.0",
+    "standard": "^17.0.0"
+  }
 }
