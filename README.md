@@ -17,3 +17,12 @@ const date = new Date('2023-01-01T20:23:01.001Z')
 const res = dateUtils.isValidDate(date)
 expect(res).to.be.true
 ```
+
+## addDays
+Adds days to a Date (in ms)
+```js
+const date = new Date('2023-01-01T20:23:01.001Z')
+
+const res = dateUtils.addDays(date, 5)
+expect(res).to.equal('2023-01-06') // format applied
+```
