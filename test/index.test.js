@@ -30,6 +30,14 @@ describe('date-utils', () => {
       expect(res).to.be.false
     })
   })
+  describe('#addDays', () => {
+    it('should add days to a date', () => {
+      const date = new Date('2023-01-01T20:23:01.001Z')
+
+      const res = dateUtils.addDays(date, 1)
+      expect(res.toISOString()).to.equal('2023-01-02T20:23:01.001Z')
+    })
+  })
   describe('#diffInDays', () => {
     it('should return the difference in days between two dates', () => {
       const date1 = new Date('2023-01-01T20:23:01.001Z')
