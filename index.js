@@ -5,7 +5,14 @@ const toUTCDateString = d =>
 
 const isValidDate = d => !Number.isNaN(d.getTime())
 
+const diffInDays = (date1, date2) => {
+  const diff = date2.getTime() - date1.getTime()
+
+  return diff / 86400000
+}
+
 module.exports = {
+  diffInDays,
   toUTCDateString,
   isValidDate
 }
