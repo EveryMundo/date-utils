@@ -26,7 +26,7 @@ class JsonDate extends Date {
   }
 
   static parser (k, v) {
-    if (typeof v === 'object' && '$date' in v && Object.keys(v).length === 1) {
+    if (typeof v === 'object' && v !== null && '$date' in v && Object.keys(v).length === 1) {
       return new JsonDate(v.$date)
     }
 
