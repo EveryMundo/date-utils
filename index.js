@@ -3,6 +3,8 @@
 const toUTCDateString = d =>
   `${d.getUTCFullYear()}-${('0' + (d.getUTCMonth() + 1)).slice(-2)}-${('0' + d.getUTCDate()).slice(-2)}`
 
+const dateToFilename = date => date.toISOString().slice(0, 19).replace(':', 'h').replace(':', 'm')
+
 const isValidDate = d => !Number.isNaN(d.getTime())
 
 const addDays = (date, days) => {
@@ -38,6 +40,7 @@ class JsonDate extends Date {
 
 module.exports = {
   JsonDate,
+  dateToFilename,
   addDays,
   diffInDays,
   toUTCDateString,
