@@ -18,7 +18,26 @@ const diffInDays = (date1, date2) => {
   return diff / 86400000
 }
 
+class JsonDate extends Date {
+  toJSON () {
+    return { $date: this.toISOString() }
+  }
+
+  static parser (k, v) {
+    if (typeof v === 'object' && '$date' in v && Object.keys(v).length === 1) {
+      return new JsonDate(v.$date)
+    }
+
+    return v
+  }
+
+  static parseJSON (str) {
+    return JSON.parse(str, JsonDate.parser)
+  }
+}
+
 module.exports = {
+  JsonDate,
   addDays,
   diffInDays,
   toUTCDateString,
