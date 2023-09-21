@@ -8,10 +8,12 @@ const dateToFilename = date => date.toISOString().slice(0, 19).replace(':', 'h')
 const isValidDate = d => !Number.isNaN(d.getTime())
 
 const addDays = (date, days) => {
-  const result = new Date(date)
-  result.setDate(result.getDate() + days)
+  if (date instanceof Date) {
+    const result = new date.constructor(date)
+    result.setDate(result.getDate() + days)
 
-  return result
+    return result
+  }
 }
 
 const diffInDays = (date1, date2) => {
