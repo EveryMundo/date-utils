@@ -15,6 +15,16 @@ describe('date-utils', () => {
       expect(res).to.equal('2023-01-01')
     })
   })
+
+  describe('#dateToFilename', () => {
+    it('should a date and time formated with h for hour and m for minute', () => {
+      const date = new Date('2023-01-01T20:23:01.001Z')
+
+      const res = dateUtils.dateToFilename(date)
+      expect(res).to.equal('2023-01-01T20h23m01')
+    })
+  })
+
   describe('#isValidDate', () => {
     it('should true for a valid date', () => {
       const date = new Date('2023-01-01T20:23:01.001Z')
