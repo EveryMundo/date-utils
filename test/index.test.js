@@ -16,6 +16,50 @@ describe('date-utils', () => {
     })
   })
 
+  describe('#toZeroHourUTC', () => {
+    it('should return a new date object with the same date but at the zero hour UTC', () => {
+      const date = new Date('2023-01-01T20:23:01.001Z')
+      const expc = new Date('2023-01-01T00:00:00.000Z')
+
+      const res = dateUtils.toZeroHourUTC(date)
+      expect(res).to.equal(date)
+      expect(res.getTime()).to.equal(expc.getTime())
+    })
+  })
+
+  describe('#copyToZeroHourUTC', () => {
+    it('should return a new date object with the same date but at the zero hour UTC', () => {
+      const date = new Date('2023-01-01T20:23:01.001Z')
+      const expc = new Date('2023-01-01T00:00:00.000Z')
+
+      const res = dateUtils.copyToZeroHourUTC(date)
+      expect(res).to.not.equal(date)
+      expect(res.getTime()).to.equal(expc.getTime())
+    })
+  })
+
+  describe('#todayDateUTC', () => {
+    context('when called without arguments', () => {
+      it('should return a date object with the curent date but at the zero hour UTC', () => {
+        const expc = new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00.000Z')
+
+        const res = dateUtils.todayDateUTC()
+        expect(res.getTime()).to.equal(expc.getTime())
+      })
+    })
+
+    context('when called with a custom class', () => {
+      it('should return a new instance of that class with the curent date but at the zero hour UTC', () => {
+        class CustomDate extends Date {}
+        const expc = new CustomDate(new Date().toISOString().slice(0, 10) + 'T00:00:00.000Z')
+
+        const res = dateUtils.todayDateUTC(CustomDate)
+        expect(res).to.be.an.instanceof(CustomDate)
+        expect(res.getTime()).to.equal(expc.getTime())
+      })
+    })
+  })
+
   describe('#dateToFilename', () => {
     it('should a date and time formated with h for hour and m for minute', () => {
       const date = new Date('2023-01-01T20:23:01.001Z')

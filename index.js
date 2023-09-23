@@ -5,6 +5,26 @@ const toUTCDateString = d =>
 
 const dateToFilename = date => date.toISOString().slice(0, 19).replace(':', 'h').replace(':', 'm')
 
+/**
+ * Modifies the date passed in argument to set the time to zero hour UTC
+ * @param {Date} date
+ * @returns Date
+ */
+const toZeroHourUTC = date => date.setUTCHours(0, 0, 0, 0) && date
+
+/**
+ * Returns a new date object with the same date but at the zero hour UTC
+ * @param {Date} date
+ * @returns Date
+ */
+const copyToZeroHourUTC = d => toZeroHourUTC(new d.constructor(d))
+
+/**
+ * Returns a new date object with the current date but at the zero hour UTC
+ * @returns Date
+ */
+const todayDateUTC = (DateClass = Date) => toZeroHourUTC(new DateClass())
+
 const isValidDate = d => !Number.isNaN(d.getTime())
 
 const addDays = (date, days) => {
@@ -42,6 +62,9 @@ class JsonDate extends Date {
 
 module.exports = {
   JsonDate,
+  todayDateUTC,
+  toZeroHourUTC,
+  copyToZeroHourUTC,
   dateToFilename,
   addDays,
   diffInDays,
