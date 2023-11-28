@@ -43,8 +43,23 @@ const diffInDays = (date1, date2) => {
 }
 
 class JsonDate extends Date {
+  isFinite = true
+
+  constructor (value) {
+    if (value === Infinity || value === null) {
+      super(Infinity)
+      this.isFinite = false
+    } else if (value instanceof Date) {
+      super(value.getTime())
+    } else if (value === undefined) {
+      super()
+    } else {
+      super(value)
+    }
+  }
+
   toJSON () {
-    return { $date: this.toISOString() }
+    return { $date: isValidDate(this) ? this.toISOString() : Infinity }
   }
 
   static parser (k, v) {

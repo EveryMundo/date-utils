@@ -125,6 +125,42 @@ describe('date-utils', () => {
       expect(res).to.be.an.instanceof(Date)
     })
 
+    describe('#constructor', () => {
+      it('should create a date from a string', () => {
+        const dateString = '2023-01-01T20:23:01.001Z'
+
+        const res = new JsonDate(dateString)
+
+        expect(res.toISOString()).to.equal(dateString)
+      })
+
+      it('should create a date from a date', () => {
+        const date = new Date('2023-01-01T20:23:01.001Z')
+
+        const res = new JsonDate(date)
+
+        expect(res.toISOString()).to.equal(date.toISOString())
+      })
+
+      it('should create a date from undefined', () => {
+        const res = new JsonDate()
+
+        expect(res.toISOString()).to.equal(new Date().toISOString())
+      })
+
+      it('should create a date from null', () => {
+        const res = new JsonDate(null)
+
+        expect(JSON.stringify(res)).to.equal('{"$date":null}')
+      })
+
+      it('should create a date from Infinity', () => {
+        const res = new JsonDate(Infinity)
+
+        expect(JSON.stringify(res)).to.equal('{"$date":null}')
+      })
+    })
+
     describe('#parseJSON', () => {
       it('should parse a json with property $date into a JsonDate instance', () => {
         const dateString = '2023-01-01T20:23:01.001Z'
